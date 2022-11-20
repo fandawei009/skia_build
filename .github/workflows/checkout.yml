@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      skip_release:
+        description: 'Skip release related steps? (true/false)'
+        required: true
+        default: 'false'
+
+env:
+  version: chrome/m109
+  
+jobs:
+  linux-ubuntu20:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        build_type: [Debug]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/checkout.py --version ${{ env.version }}
+      - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/archive_source.py --version ${{ env.version }}  --build-type ${{ matrix.build_type }} --classifier ubuntu20
+      - uses: actions/upload-artifact@v2
+        if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
+        with:
+          name: Skia-linux-${{ matrix.build_type }}-x64-ubuntu20.zip
+          path: '*.zip'
+      - run: python3 script/release_source.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}  --classifier ubuntu20
+        if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
