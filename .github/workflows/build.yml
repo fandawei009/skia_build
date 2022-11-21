@@ -78,7 +78,7 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
-      - run: sudo script/prepare_linux.sh
+      - run: sudo script/prepare_linux1.sh
       - run: sudo apt-get install binutils-2.26 -y
       - run: python3 script/check_release.py --version ${{ env.version }}  --build-type ${{ matrix.build_type }} --classifier ubuntu14
         if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
@@ -106,7 +106,7 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
-      - run: script/prepare_linux_wasm.sh
+      - run: sudo script/prepare_linux_wasm.sh
       - run: python3 script/check_release.py --version ${{ env.version }} --target wasm --build-type ${{ matrix.build_type }} --machine wasm
         if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
         env:
