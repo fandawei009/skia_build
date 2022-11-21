@@ -37,7 +37,7 @@ def main():
     'skia_enable_skottie=true',
     'skia_enable_fontmgr_custom_directory=true',
     'skia_enable_fontmgr_custom_embedded=true',
-    'skia_enable_fontmgr_custom_empty=true',
+    'skia_enable_fontmgr_custom_empty=true'
   ]
 
   if 'macos' == target or isIos:
