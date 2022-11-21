@@ -99,7 +99,7 @@ def main():
         'skia_use_system_libjpeg_turbo=false',
         'skia_use_system_libwebp=false',
         'skia_enable_tools=false',
-        'skia_enable_fontmgr_custom_directory=false',
+        'skia_enable_fontmgr_custom_directory=true',
         'skia_enable_fontmgr_custom_embedded=true',
         'skia_enable_fontmgr_custom_empty=false',
         'skia_use_webgl=true',
