@@ -34,7 +34,10 @@ def main():
     'skia_use_system_harfbuzz=false',
     'skia_pdf_subset_harfbuzz=true',
     'skia_use_system_icu=false',
-    'skia_enable_skottie=true'
+    'skia_enable_skottie=true',
+    'skia_enable_fontmgr_custom_directory=true',
+    'skia_enable_fontmgr_custom_embedded=true',
+    'skia_enable_fontmgr_custom_empty=true',
   ]
 
   if 'macos' == target or isIos:
@@ -82,6 +85,10 @@ def main():
     # echo "NODE_JS = '/opt/homebrew/bin/node'" >> ~/.emscripten
 
     # see skia/modules/canvaskit/compile.sh for reference:
+    //fdw del 
+     #'skia_enable_fontmgr_custom_directory=true',
+        #'skia_enable_fontmgr_custom_embedded=true',
+        #'skia_enable_fontmgr_custom_empty=false',
     args += [
         'skia_use_dng_sdk=false',
         'skia_use_libjpeg_turbo_decode=true',
@@ -99,9 +106,6 @@ def main():
         'skia_use_system_libjpeg_turbo=false',
         'skia_use_system_libwebp=false',
         'skia_enable_tools=false',
-        'skia_enable_fontmgr_custom_directory=true',
-        'skia_enable_fontmgr_custom_embedded=true',
-        'skia_enable_fontmgr_custom_empty=false',
         'skia_use_webgl=true',
         'skia_gl_standard="webgl"',
         'skia_use_gl=true',
