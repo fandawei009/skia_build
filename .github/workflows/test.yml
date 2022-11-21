@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v2
-      - run: sudo script/prepare_linux.sh
+      - run: sudo script/prepare_linux1.sh
       - run: python3 script/check_release.py --version ${{ env.version }} --build-type ${{ matrix.build_type }} --classifier ubuntu18
         if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
         env:
